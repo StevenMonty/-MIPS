@@ -90,15 +90,13 @@ Imm is an 8-bit immediate. The immediate is signed in addi and unsigned in addui
 
 In branches, jal and j, Imm specifies the target address. Both branches and jumps use absolute addressing for the target address. So, for example, if a branch is taken and Imm is 0x1a, then the target address for the branch is 0x1a.
 
-
-
-
 Rs is the first source register and Rt is the second source register. Rs is the destination register.
 
 Imm is an 8-bit immediate. The immediate is signed in addi and unsigned in addui, bn, bx, bp, bz, jal, and j. For the addition instructions with an immediate (i.e., addi and addui), the bit Subop controls whether the immediate is sign or zero extended. When Subop is 0, then Imm is zero extended to implement the addui instruction. Otherwise, Imm is sign extended to implement addi. Imm is zero extended for branches and jump (j).
 
 In branches, jal and j, Imm specifies the target address. Both branches and jumps use absolute addressing for the target address. So, for example, if a branch is taken and Imm is 0x1a, then the target address for the branch is 0x1a.
 
+## Sub-Circuits:
 
 ### The Program Counter
 
