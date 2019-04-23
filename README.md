@@ -43,6 +43,26 @@ and I is used for instructions with an immediate. The formats are:
 
 <table>
   <tr>
+    <th colspan="6"><span style="font-weight:bold">I Format Instruction</span></th>
+  </tr>
+  <tr>
+    <td>Bit position</td>
+    <td>15-12</td>
+    <td>11-9</td>
+    <td colspan="2">8-1</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>Field</td>
+    <td><span style="font-style:italic">Opcode</span></td>
+    <td><span style="font-style:italic">Rs</span></td>
+    <td colspan="2"><span style="font-style:italic">Imm</span></td>
+    <td><span style="font-style:italic">Subop</span></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
     <th colspan="6"><span style="font-weight:bold">R Format Instruction</span></th>
   </tr>
   <tr>
@@ -63,28 +83,8 @@ and I is used for instructions with an immediate. The formats are:
   </tr>
 </table>
 
-<table>
-  <tr>
-    <th colspan="6"><span style="font-weight:bold">I Format Instruction</span></th>
-  </tr>
-  <tr>
-    <td>Bit position</td>
-    <td>15-12</td>
-    <td>11-9</td>
-    <td colspan="2">8-1</td>
-    <td>0</td>
-  </tr>
-  <tr>
-    <td>Field</td>
-    <td><span style="font-style:italic">Opcode</span></td>
-    <td><span style="font-style:italic">Rs</span></td>
-    <td colspan="2"><span style="font-style:italic">Imm</span></td>
-    <td><span style="font-style:italic">Subop</span></td>
-  </tr>
-</table>
 
-
-Rs is the first source register and Rt is the second source register. Rs is the destination register.
+$rs is the first source register and $rt is the second source register. $rs is also the destination register for the result to be stored in.
 
 Imm is an 8-bit immediate. The immediate is signed in addi and unsigned in addui, bn, bx, bp, bz, jal, and j. For the addition instructions with an immediate (i.e., addi and addui), the bit Subop controls whether the immediate is sign or zero extended. When Subop is 0, then Imm is zero extended to implement the addui instruction. Otherwise, Imm is sign extended to implement addi. Imm is zero extended for branches and jump (j).
 
@@ -99,16 +99,23 @@ In branches, jal and j, Imm specifies the target address. Both branches and jump
 ## Sub-Circuits:
 
 ### The Program Counter
+The program counter is a register that holds an 8-bit instruction address. It specifies the instruction to fetch from the instruction memory. It is updated every clock cycle with PC + 1 or the target address of a taken branch (or jump).
 
 ### The Register File
+For the general-purpose registers, µMIPS has 8 registers. An R-format instruction can read 2 source registers and write 1 destination register. Thus, the register file has 2 read ports and 2 write ports (the second write port is used for multiplication and division.) 
 
 ### The Arithmetic Logic Unit
+The ALU is used to execute the arithmetic instructions. It may also be used to do branch comparison. The ALU is capable of performing AND, NOR, Addidtion, Subtraction, Multiplcation, Division, Logical Right and Left shifts, and greater than, less than, and equal to 0 comparisons.  
 
 ### Field Splitter
+The field splitter takes in the instruction from ROM and parses it into the opcode, $rs, $rt, and immediate value. 
 
 ### Instruction Decoder
+The decoder takes the opcode from the field splitter and generates the appropriate control signals to allow data to flow to the appropriate components inside the CPU. 
 
 ### LED Display
+Displays the contents of the register specified in the ```put $rs``` command. 
 
 ### The Compiler
+
 
