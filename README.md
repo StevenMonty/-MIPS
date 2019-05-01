@@ -1,10 +1,12 @@
 # μMIPS
 ##### A Single-Cycle 16 Bit MIPS Processor
 &nbsp;
-µMIPS is a simplified MIPS architecture with a native word size of 16-bits. That is, the instructions and data values are 16-bits wide. µMIPS immediates can be both unsigned and signed using two’s complement. The processor is made up of many sub-circuits: The Program Counter (PC), The Register File, The Arithmetic Logic Unit (ALU), Field Splitter, Instruction Decoder, and an LED Display. 
+µMIPS is a simplified MIPS architecture with a native word size of 16-bits. That is, the instructions and data values are 16-bits wide. µMIPS immediates can be both unsigned and signed using two’s complement. The processor is made up of many sub-circuits: The Program Counter (PC), The Register File, The Arithmetic Logic Unit (ALU), Field Splitter, Instruction Decoder, and an LED Display.
+
+![](https://github.com/StevenMonty/MuMIPS/blob/master/CPU.png)
 
 ### Instructions
-µMIPS has a limited instruction set with the following operations (grouped by purpose): 
+µMIPS has a limited instruction set with the following operations (grouped by purpose):
 
 | Opcode | Subop | Format |    Instruction   | Definition                             |
 |--------|-------|--------|------------------|----------------------------------------|
@@ -102,20 +104,18 @@ In branches, jal and j, Imm specifies the target address. Both branches and jump
 The program counter is a register that holds an 8-bit instruction address. It specifies the instruction to fetch from the instruction memory. It is updated every clock cycle with PC + 1 or the target address of a taken branch (or jump).
 
 ### The Register File
-For the general-purpose registers, µMIPS has 8 registers. An R-format instruction can read 2 source registers and write 1 destination register. Thus, the register file has 2 read ports and 2 write ports (the second write port is used for multiplication and division.) 
+For the general-purpose registers, µMIPS has 8 registers. An R-format instruction can read 2 source registers and write 1 destination register. Thus, the register file has 2 read ports and 2 write ports (the second write port is used for multiplication and division.)
 
 ### The Arithmetic Logic Unit
 The ALU is used to execute the arithmetic instructions. It may also be used to do branch comparison. The ALU is capable of performing AND, NOR, Addidtion, Subtraction, Multiplcation, Division, Logical Right and Left shifts, and greater than, less than, and equal to 0 comparisons.  
 
 ### Field Splitter
-The field splitter takes in the instruction from ROM and parses it into the opcode, $rs, $rt, and immediate value. 
+The field splitter takes in the instruction from ROM and parses it into the opcode, $rs, $rt, and immediate value.
 
 ### Instruction Decoder
-The decoder takes the opcode from the field splitter and generates the appropriate control signals to allow data to flow to the appropriate components inside the CPU. 
+The decoder takes the opcode from the field splitter and generates the appropriate control signals to allow data to flow to the appropriate components inside the CPU.
 
 ### LED Display
-Displays the contents of the register specified in the ```put $rs``` command. 
+Displays the contents of the register specified in the ```put $rs``` command.
 
 ### The Compiler
-
-
